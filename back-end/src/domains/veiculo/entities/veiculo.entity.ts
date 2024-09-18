@@ -1,6 +1,7 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+import { Acessorio } from '../acessorio/entities/acessorio.entity';
 
 export type VeiculoDocument = HydratedDocument<Veiculo>;
 
@@ -14,6 +15,9 @@ export class Veiculo {
 
   @Prop()
   placa: string;
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Acessorio' }] })
+  acessorios: Types.ObjectId[]; 
 
 }
 
