@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VeiculoService = void 0;
 const common_1 = require("@nestjs/common");
@@ -37,11 +36,17 @@ let VeiculoService = class VeiculoService {
     async remove(modelo) {
         return await this.veiculoModel.findOneAndDelete({ modelo: modelo });
     }
+    async addAcessorio(modelo, acessorioId) {
+        return await this.veiculoModel.findOneAndUpdate({ modelo: modelo }, { $push: { acessorios: acessorioId } }, { new: true });
+    }
+    async removeAcessorio(modelo, acessorioId) {
+        return await this.veiculoModel.findOneAndUpdate({ modelo: modelo }, { $pull: { acessorios: acessorioId } }, { new: true });
+    }
 };
 exports.VeiculoService = VeiculoService;
 exports.VeiculoService = VeiculoService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(veiculo_entity_1.Veiculo.name)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], VeiculoService);
 //# sourceMappingURL=veiculo.service.js.map

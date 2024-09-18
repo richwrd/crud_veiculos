@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAcessorioDto } from './dto/create-acessorio.dto';
 import { UpdateAcessorioDto } from './dto/update-acessorio.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Acessorio } from './entities/acessorio.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AcessorioService {
-  create(createAcessorioDto: CreateAcessorioDto) {
-    return 'This action adds a new acessorio';
+
+constructor(@InjectModel(Acessorio.name) private acessorioModel: Model<Acessorio>) {}
+
+  async create(createAcessorioDto: CreateAcessorioDto) {
+    return await this.acessorioModel.create(createAcessorioDto);
   }
 
-  findAll() {
-    return `This action returns all acessorio`;
+  async findAll() {
+    return await this.acessorioModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} acessorio`;
+  async findOne(id: string) {
+    return await this.acessorioModel.findOne({ _id: id });
   }
 
-  update(id: number, updateAcessorioDto: UpdateAcessorioDto) {
-    return `This action updates a #${id} acessorio`;
+  async update(id: string, updateAcessorioDto: UpdateAcessorioDto) {
+    return await this.acessorioModel.findOneAndUpdate({ _id: id}, updateAcessorioDto, {new : true});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} acessorio`;
+  async remove(id: string) {
+    return await this.acessorioModel.findOneAndDelete({ _id : id });
   }
 }

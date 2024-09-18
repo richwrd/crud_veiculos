@@ -9,8 +9,7 @@ SplashScreen.preventAutoHideAsync();
 export default function VeiculoLayout() {
   return (
     <Stack>
-      <Stack.Screen name="create/index" options={{ headerTitle: 'Criar Veículo'}} />
-      <Stack.Screen name="edit/[modelo]/index" options={{ headerTitle: "Editar Veículo"}} />
+      <Stack.Screen name="create/index" options={{ headerTitle: 'Criar Acessório'}} />
     </Stack>
   );
 }

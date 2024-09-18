@@ -36,6 +36,12 @@ let VeiculoController = class VeiculoController {
     async remove(modelo) {
         return this.veiculoService.remove(modelo);
     }
+    async addAcessorio(modelo, acessorioId) {
+        return this.veiculoService.addAcessorio(modelo, acessorioId);
+    }
+    async removeAcessorio(modelo, acessorioId) {
+        return this.veiculoService.removeAcessorio(modelo, acessorioId);
+    }
 };
 exports.VeiculoController = VeiculoController;
 __decorate([
@@ -73,6 +79,22 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], VeiculoController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)(':modelo/acessorio/:acessorioId'),
+    __param(0, (0, common_1.Param)('modelo')),
+    __param(1, (0, common_1.Param)('acessorioId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], VeiculoController.prototype, "addAcessorio", null);
+__decorate([
+    (0, common_1.Post)(':modelo/acessorio-rm/:acessorioId'),
+    __param(0, (0, common_1.Param)('modelo')),
+    __param(1, (0, common_1.Param)('acessorioId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], VeiculoController.prototype, "removeAcessorio", null);
 exports.VeiculoController = VeiculoController = __decorate([
     (0, common_1.Controller)('veiculo'),
     __metadata("design:paramtypes", [veiculo_service_1.VeiculoService])

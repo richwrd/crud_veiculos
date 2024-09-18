@@ -5,9 +5,25 @@ import { Model } from 'mongoose';
 export declare class VeiculoService {
     private veiculoModel;
     constructor(veiculoModel: Model<Veiculo>);
-    create(createVeiculoDto: CreateVeiculoDto): unknown;
-    findAll(): unknown;
-    findByModel(modelo: string): unknown;
-    update(modelo: string, updateVeiculoDto: UpdateVeiculoDto): unknown;
-    remove(modelo: string): unknown;
+    create(createVeiculoDto: CreateVeiculoDto): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    findAll(): Promise<(import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
+    findByModel(modelo: string): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    update(modelo: string, updateVeiculoDto: UpdateVeiculoDto): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    remove(modelo: string): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    addAcessorio(modelo: string, acessorioId: string): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    removeAcessorio(modelo: string, acessorioId: string): Promise<import("mongoose").Document<unknown, {}, Veiculo> & Veiculo & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
 }

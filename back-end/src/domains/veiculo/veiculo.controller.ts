@@ -32,4 +32,14 @@ export class VeiculoController {
   async remove(@Param('modelo') modelo: string) {
     return this.veiculoService.remove(modelo);
   }
+
+  @Post(':modelo/acessorio/:acessorioId')
+  async addAcessorio(@Param('modelo') modelo: string, @Param('acessorioId') acessorioId: string) {
+    return this.veiculoService.addAcessorio(modelo, acessorioId);
+  }
+
+  @Post(':modelo/acessorio-rm/:acessorioId')
+  async removeAcessorio(@Param('modelo') modelo: string, @Param('acessorioId') acessorioId: string) {
+    return this.veiculoService.removeAcessorio(modelo, acessorioId);
+  }
 }

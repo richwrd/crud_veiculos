@@ -2,18 +2,20 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { ThemedText } from './ThemedText';
-import { VeiculoProps } from '@/props/veiculo';
+import { AcessorioProps } from '@/props/acessorio';
 
-export default function VeiculoList() {
+export default function AcessorioList() {
   const [isLoading, setLoading] = useState(true);
-  const [veiculo, setVeiculo] = useState < VeiculoProps[] > ([]);
+  const [acessorio, setAcessorio] = useState < AcessorioProps[] > ([]);
+  const [nome, setNome] = useState("");
 
-  const getVeiculos = async () => {
+  const getAcessorios = async () => {
     try {
-      const response = await fetch('http://localhost:3000/veiculo/');
+      const response = await fetch('http://localhost:3000/acessorio/');
       const json = await response.json();
       console.log('RECEBI');
-      setVeiculo(json);
+      setAcessorio(json);
+      setNome(json.nome);
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
     } finally {
@@ -22,57 +24,40 @@ export default function VeiculoList() {
   };
 
   useEffect(() => {
-    getVeiculos();
+    getAcessorios();
   }, []);
 
   // toda vez que recarregar a pagina trás novamente
   useFocusEffect(
     useCallback(() => {
-      getVeiculos();
+      getAcessorios();
     }, [])
   );
 
-  function VeiculoCard({ veiculoCard }: { veiculoCard: VeiculoProps }){
+  function AcessorioCard({ acessorioCard }: { acessorioCard: AcessorioProps }){
 
     return (
       <View style={styles.card}>
         <ThemedText>
-          {veiculoCard.modelo}
-        </ThemedText>
-
-        <ThemedText>
-          {veiculoCard.anoFabricacao}
-        </ThemedText>
-
-        <ThemedText>
-          {veiculoCard.placa}
+          {acessorioCard.nome}
         </ThemedText>
 
         <View style={{ display: "flex", alignItems: "center" }}>
-
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: 'blue'}]}
-            onPress={() => {
-              router.push(`../(veiculo)/edit/${veiculoCard.modelo}`);
-            }}
-          >
-            <Text style={styles.buttonText}> Editar </Text>
-          </TouchableOpacity>
 
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: 'red'}]}
             onPress={ async () => {
               try {
-                  await fetch(`http://localhost:3000/veiculo/${veiculoCard.modelo}`, {
+                  await fetch(`http://localhost:3000/acessorio/${acessorioCard.nome}`, {
                       method: 'DELETE',
                       headers: {
                         'Content-Type': 'application/json',
                       }
                     })
               } catch (error){
-                console.log('Não foi possivel apagar veiculo: ' + error); 
+                console.log('Não foi possivel apagar acessório: ' + error); 
               } finally {
-                getVeiculos();
+                getAcessorios();
               }
             }}
           >
@@ -91,9 +76,9 @@ export default function VeiculoList() {
   return (
     <View>
         <FlatList
-        data={veiculo}
-        keyExtractor={item => item.modelo}
-        renderItem={({ item }) => <VeiculoCard veiculoCard={item} />}
+        data={acessorio}
+        keyExtractor={item => item.nome}
+        renderItem={({ item }) => <AcessorioCard acessorioCard={item} />}
         />
     </View>
   );

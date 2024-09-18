@@ -4,7 +4,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { router } from 'expo-router';
-import VeiculoList from '@/components/veiculoList';
+import AcessorioList from '@/components/acessorioList';
 
 export default function HomeScreen() {
   return (
@@ -17,7 +17,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Veículos 🚘</ThemedText>
+        <ThemedText type="title">Acessórios 🏷️</ThemedText>
       </ThemedView>
       
       <ThemedView style={styles.stepContainer}>
@@ -40,7 +40,7 @@ export default function HomeScreen() {
       </ThemedView>
         
       <ThemedView>
-        < VeiculoList />
+        < AcessorioList />
       </ThemedView>
     </ParallaxScrollView>
   );

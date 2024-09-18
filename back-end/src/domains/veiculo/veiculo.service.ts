@@ -30,11 +30,13 @@ export class VeiculoService {
     return await this.veiculoModel.findOneAndDelete({ modelo: modelo });
   }
 
-  // async addAcessorio(){
-  //   return await this.veiculoModel.updateMany({}, { $push: { acessorios: }} ;
-  // }
+  async addAcessorio(modelo: string, acessorioId: string) {
+    return await this.veiculoModel.findOneAndUpdate({ modelo: modelo }, { $push: { acessorios: acessorioId } }, { new: true }
+    );
+  }
 
-  // async removeAcessorio(){
-  //   return await this.veiculoModel.updateMany({}, { $pull: { acessorios: }} ;
-  // }
+  async removeAcessorio(modelo: string, acessorioId: string) {
+    return await this.veiculoModel.findOneAndUpdate({ modelo: modelo }, { $pull: { acessorios: acessorioId } }, { new: true }
+    );
+  }
 }

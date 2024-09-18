@@ -8,27 +8,27 @@ export class AcessorioController {
   constructor(private readonly acessorioService: AcessorioService) {}
 
   @Post()
-  create(@Body() createAcessorioDto: CreateAcessorioDto) {
+  async create(@Body() createAcessorioDto: CreateAcessorioDto) {
     return this.acessorioService.create(createAcessorioDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.acessorioService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.acessorioService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.acessorioService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAcessorioDto: UpdateAcessorioDto) {
-    return this.acessorioService.update(+id, updateAcessorioDto);
+  async update(@Param('id') id: string, @Body() updateAcessorioDto: UpdateAcessorioDto) {
+    return this.acessorioService.update(id, updateAcessorioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.acessorioService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.acessorioService.remove(id);
   }
 }
